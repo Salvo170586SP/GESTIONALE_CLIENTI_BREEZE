@@ -41,7 +41,7 @@
                                 </svg>
                             </span>
 
-                            <input type="text" placeholder="Cerca cliente per nome" name="search" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-2xl md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5  focus:border-slate-300 focus:ring-blue-200">
+                            <input type="text" autocomplete="off" placeholder="Cerca cliente per nome" name="search" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-2xl md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5  focus:border-slate-300 focus:ring-blue-200">
                             <button type="submit" class="font-bold text-white rounded-2xl px-5 py-1 bg-gray-500 ms-2 hover:bg-gray-600">cerca</button>
                         </div>
                     </form>
