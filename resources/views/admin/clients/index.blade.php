@@ -49,6 +49,7 @@
                 </div>
             </div>
 
+            @if(count($clients) > 0)
             <div class="flex flex-col mt-6">
                 <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -217,6 +218,9 @@
 
                 @endif
             </div>
+            @else
+            <div class="w-full my-10 text-center">Non ci sono clienti in lista</div>
+            @endif
 
             {{-- <div class="mt-6 sm:flex sm:items-center sm:justify-between ">
                 <div class="text-sm text-gray-500 dark:text-gray-400">

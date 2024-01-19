@@ -45,11 +45,11 @@
                         </div>
                         <div x-cloak style="display: none" x-show="deleteAll" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" class="fixed z-10 inset-0 overflow-y-auto" x-cloak>
                             <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                 <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                                <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                         <div class="sm:flex sm:items-start">
+                                        <div class="sm:flex sm:items-start">
                                             <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                                                 <svg width="64px" height="64px" class="h-6 w-6 text-red-600" stroke="currentColor" fill="none" viewBox="0 0 24.00 24.00" xmlns="http://www.w3.org/2000/svg" stroke="#ef4444" stroke-width="0.45600000000000007">
+                                                <svg width="64px" height="64px" class="h-6 w-6 text-red-600" stroke="currentColor" fill="none" viewBox="0 0 24.00 24.00" xmlns="http://www.w3.org/2000/svg" stroke="#ef4444" stroke-width="0.45600000000000007">
                                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                                     <g id="SVGRepo_iconCarrier">
@@ -101,25 +101,25 @@
                 <div class="p-2 shadow-md rounded-lg w-full border border-slate-300 my-2 p-4 relative overflow-hidden  @if($note->is_active === 1) bg-slate-200 @else bg-slate-100  @endif">
                     <div class="w-full h-[15px] ">
                         <form action="{{ route('admin.notes.isCompletedNote', $note->id)}}" method="get">
-                            @csrf
-                            <button id="tuoBottone">
-                                @if($note->is_active === 1)
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-slate-500 hover:text-slate-600">
-                                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
-                                </svg>
-                                @else
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-slate-500 hover:text-slate-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                                </svg>
-                                @endif
-                            </button>
+                        @csrf
+                        <button id="btnEseguiChiamata">
+                            @if($note->is_active === 1)
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" id="check-{{$note->id}}" class="w-5 h-5  text-slate-500 hover:text-slate-600">
+                                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" />
+                            </svg>
+                            @else
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" id="notCheck-{{$note->id}}" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5  text-slate-500 hover:text-slate-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                            @endif
+                        </button>
                         </form>
 
                     </div>
                     <div class="flex justify-between items-center">
                         <small>ultima modifica: {{ $note->updated_at }}</small>
                         <div class="flex">
-                             <div x-data="{ showNote{{ $note->id }}: false }">
+                            <div x-data="{ showNote{{ $note->id }}: false }">
                                 <!-- Button to open the modal -->
                                 <button @click="showNote{{ $note->id }} = true" class="px-5 py-1 flex items-center  bg-slate-500 text-white transition-colors duration-200 rounded-2xl  hover:bg-slate-600 focus:bg-blue-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
@@ -264,3 +264,48 @@
         </div>
     </section>
 </x-app-layout>
+{{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+
+{{-- 
+<script>
+    $(document).ready(function() {
+        var noteIds = <?php echo json_encode($client->notes); ?> ;
+        $("#btnEseguiChiamata").click(function(e) {
+            event.preventDefault();
+            noteIds.forEach(function(note) {
+                var baseUrl = "{{ route('admin.notes.isCompletedNote', ['note' => ':note.id']) }}";
+                var url = baseUrl.replace(':note', note.id);
+
+                $.ajax({
+                    url: url
+                    , type: 'GET'
+                    , dataType: 'json'
+                    , success: function(response) {
+                        // Tuo codice di gestione della risposta per ogni elemento
+                        console.log(response);
+
+                        const check = document.getElementById('check-' + note.id);
+                        const notCheck = document.getElementById('notCheck-' + note.id);
+                        if (note.position == 1) {
+                        check.classList.add('block');
+                        check.classList.remove('hidden');
+
+                        notCheck.classList.add('hidden');
+                        notCheck.classList.remove('block');
+                    } else {
+                        check.classList.add('hidden');
+                        check.classList.remove('block');
+
+                        notCheck.classList.add('block');
+                        notCheck.classList.remove('hidden');
+                    }
+                    }
+                    , error: function(error) {
+                        console.log('Errore nella chiamata AJAX:', error);
+                    }
+                });
+            });
+        });
+    });
+
+</script> --}}

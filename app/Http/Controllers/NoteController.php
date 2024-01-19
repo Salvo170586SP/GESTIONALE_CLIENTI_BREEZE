@@ -126,7 +126,9 @@ class NoteController extends Controller
         $note->is_active = $isCompleted;
         $note->save();
 
-        return back();
+       /*  return response()->json($isCompleted); */
+
+       return back();
     }
 
     public function getMonthNote(Month $month, Client $client)

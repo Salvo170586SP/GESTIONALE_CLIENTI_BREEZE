@@ -48,7 +48,7 @@ Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function (
     Route::put('/notes/update/{note}/{client}', [NoteController::class, 'update'])->name('notes.update');
     Route::delete('/notes/delete/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
     Route::delete('/notes/destroyAllNote/{client}', [NoteController::class, 'destroyAllNote'])->name('notes.destroyAllNote');
-    Route::get('/notes/store/isCompletedNote/{note}', [NoteController::class, 'isCompletedNote'])->name('notes.isCompletedNote');
+    Route::get('/notes/isCompletedNote/{note}', [NoteController::class, 'isCompletedNote'])->name('notes.isCompletedNote');
     Route::get('/notes/getMonthNote/{month}/{client}', [NoteController::class, 'getMonthNote'])->name('notes.getMonthNote');
     
 

@@ -119,7 +119,7 @@ class ClientController extends Controller
             $url = Storage::put('/img_client', $request->file('img_url'));
             $client->img_url = $url;
         }
-        
+
         $client->update([
             'name_client' => $request->name_client,
             'surname_client' => $request->surname_client,
@@ -147,6 +147,10 @@ class ClientController extends Controller
                 }
                 $file->delete();
             }
+            foreach ($client->notes as $note) {
+                $note->delete();
+            }
+
             $client->delete();
         }
 
@@ -159,9 +163,7 @@ class ClientController extends Controller
 
             if ($file->url_file) {
                 Storage::delete($file->url_file);
-                $file->url_file = null;
-                $file->save();
-            }
+             }
 
             $file->delete();
         }
