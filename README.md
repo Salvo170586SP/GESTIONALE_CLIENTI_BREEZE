@@ -8,6 +8,8 @@ Features:
 - Assign simple notes or appointments in the dedicated customer section, select them, and filter them by months of the year;
 - Search for the relevant customer in the table;
 - Ability to rearrange the order of customers according to preference using the position number;
+- Implemented the calendar for each client, in order to manage simple appointments in a clearer and more dynamic manner;
+  
 ##
 
 
