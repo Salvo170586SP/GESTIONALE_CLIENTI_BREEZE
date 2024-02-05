@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-lg text-gray-800 leading-tight">
-                {{ __('Dashboard / Clienti / Allegati') }}
+                {{ __('Dashboard / Clienti / Allegati') }} {{ $client->name_client}} {{ $client->surname_client}}
             </h2>
             <a href="{{ route('admin.clients.index') }}" class="flex items-center justify-center  px-5 py-1   text-sm tracking-wide text-white bg-gray-400 rounded-2xl shrink-0 sm:w-auto gap-x-2 hover:bg-gray-500 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

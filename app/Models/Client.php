@@ -35,6 +35,11 @@ class Client extends Model
         return $this->hasMany(Note::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
