@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-lg text-gray-800 leading-tight">
                 {{ __('Dashboard / Clienti / Note') }}
             </h2>
-            <a href="{{ route('admin.clients.index') }}" class="flex items-center justify-center  px-5 py-1   text-sm tracking-wide text-white bg-gray-400 rounded-2xl shrink-0 sm:w-auto gap-x-2 hover:bg-gray-500 ">
+            <a href="{{ route('admin.clients.index') }}" class="flex items-center justify-center  px-5 py-2   text-sm tracking-wide text-white bg-gray-400 rounded-xl shrink-0 sm:w-auto gap-x-2 hover:bg-gray-500 ">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
@@ -16,16 +16,16 @@
 
     <!-- component -->
     <section class="container px-4 mx-auto">
-        <div class="my-5 flex">
+        <div class="my-5 flex items-center">
             <h2 class="text-xl me-2">
                 Note Cliente: {{ Str::upper($client->name_client) }} {{ Str::upper($client->surname_client) }}
             </h2>
-            <span class="bg-slate-200 rounded-2xl border border-slate-300 px-5 py-1 text-sm">{{ count($client->notes) }} note</span>
+            <span class="bg-slate-200 rounded-xl border border-slate-300 px-5 py-2 text-sm">{{ count($client->notes) }} note</span>
         </div>
         <div class="py-12">
             <div class="sm:flex sm:items-center sm:justify-between">
                 <div class="flex items-center justify-between mt-4 gap-x-3 w-full">
-                    <a href="{{ route('admin.notes.create', $client->id) }}" class="flex items-center justify-center w-1/2 px-5 py-1   tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-2xl shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 ">
+                    <a href="{{ route('admin.notes.create', $client->id) }}" class="flex items-center justify-center  px-5 py-2   tracking-wide text-white transition-colors duration-200 bg-slate-600 rounded-xl sm:w-auto gap-x-2 hover:bg-slate-700 focus:bg-slate-800  ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -91,14 +91,14 @@
 
             <div class="mt-6 md:flex md:items-center md:justify-between flex-col">
                 <div class="w-full flex  justify-between my-5">
-                    <a class="bg-slate-400 hover:bg-slate-600 rounded-2xl px-5 py-1 text-white @if(url()->current() == route('admin.notes.index',  $client->id)) bg-slate-700 @endif" href="{{ route('admin.notes.index',  $client->id ) }}">All</a>
+                    <a class="bg-slate-400 hover:bg-slate-600 rounded-xl px-5 py-2 text-white @if(url()->current() == route('admin.notes.index',  $client->id)) bg-slate-700 @endif" href="{{ route('admin.notes.index',  $client->id ) }}">All</a>
                     @foreach($months as $month)
-                    <a class="bg-slate-400 hover:bg-slate-600 rounded-2xl px-7 py-1 text-white  @if(url()->current() == route('admin.notes.getMonthNote', [$month->id, $client->id] )) bg-slate-700 @endif " href="{{ route('admin.notes.getMonthNote', [$month->id, $client->id]) }}">{{ $month->name_month }}</a>
+                    <a class="bg-slate-400 hover:bg-slate-600 rounded-xl px-7 py-2 text-white  @if(url()->current() == route('admin.notes.getMonthNote', [$month->id, $client->id] )) bg-slate-700 @endif " href="{{ route('admin.notes.getMonthNote', [$month->id, $client->id]) }}">{{ $month->name_month }}</a>
                     @endforeach
                 </div>
 
                 @forelse($notes as $note)
-                <div class="p-2 shadow-md rounded-lg w-full border border-slate-300 my-2 p-4 relative overflow-hidden  @if($note->is_active === 1) bg-slate-200 @else bg-slate-100  @endif">
+                <div class="p-2 shadow-md rounded-xl w-full border border-slate-300 my-2 p-4 relative overflow-hidden  @if($note->is_active === 1) bg-slate-200 @else bg-white  @endif">
                     <div class="w-full h-[15px] ">
                         <form action="{{ route('admin.notes.isCompletedNote', $note->id)}}" method="get">
                         @csrf
@@ -121,7 +121,7 @@
                         <div class="flex">
                             <div x-data="{ showNote{{ $note->id }}: false }">
                                 <!-- Button to open the modal -->
-                                <button @click="showNote{{ $note->id }} = true" class="px-5 py-1 flex items-center  bg-slate-500 text-white transition-colors duration-200 rounded-2xl  hover:bg-slate-600 focus:bg-blue-800">
+                                <button @click="showNote{{ $note->id }} = true" class="px-5 py-2 flex items-center  bg-slate-500 text-white transition-colors duration-200 rounded-xl  hover:bg-slate-600 focus:bg-blue-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -162,7 +162,7 @@
                                             </div>
                                             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
 
-                                                <button @click="showNote{{ $note->id }} = false" type="button" class="mt-3 me-3 w-full inline-flex justify-center rounded-2xl border border-gray-300 shadow-sm px-5 py-1 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"> Cancel </button>
+                                                <button @click="showNote{{ $note->id }} = false" type="button" class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"> Cancel </button>
                                             </div>
 
                                         </div>
@@ -170,7 +170,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ route('admin.notes.edit', [$note->id, $client->id]) }}" class="bg-slate-600 flex items-center hover:bg-slate-700 px-5 py-1 text-white rounded-2xl mx-2">
+                            <a href="{{ route('admin.notes.edit', [$note->id, $client->id]) }}" class="bg-slate-600 flex items-center hover:bg-slate-700 px-5 py-2 text-white rounded-xl mx-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                 </svg>
@@ -179,7 +179,7 @@
 
                             <div x-data="{ deleteModal{{ $note->id }}: false }">
                                 <!-- Button to open the modal -->
-                                <button @click="deleteModal{{ $note->id }} = true" class="px-5 py-1 flex items-center  bg-red-600 text-white transition-colors duration-200 rounded-2xl  hover:bg-red-500 focus:bg-blue-800">
+                                <button @click="deleteModal{{ $note->id }} = true" class="px-5 py-2 flex items-center  bg-red-600 text-white transition-colors duration-200 rounded-xl  hover:bg-red-500 focus:bg-blue-800">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                     </svg>
@@ -221,14 +221,14 @@
                                                 <form action="{{ route('admin.notes.destroy', $note->id )}}" method="post">
                                                     @csrf
                                                     @method('delete')
-                                                    <button class="bg-red-500 hover:bg-red-600 flex items-center px-5 py-1 text-white rounded-2xl">
+                                                    <button class="bg-red-500 hover:bg-red-600 flex items-center px-5 py-2 text-white rounded-xl">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                         </svg>
                                                         <span class="ms-1">elimina</span>
                                                     </button>
                                                 </form>
-                                                <button @click="deleteModal{{ $note->id }} = false" type="button" class="mt-3 me-3 w-full inline-flex justify-center rounded-2xl border border-gray-300 shadow-sm px-5 py-1 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"> Cancel </button>
+                                                <button @click="deleteModal{{ $note->id }} = false" type="button" class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"> Cancel </button>
 
                                             </div>
                                         </div>
@@ -241,7 +241,7 @@
                         <div>
                             <div class="mb-5">
                                 @forelse($note->months as $month)
-                                <small class="bg-slate-600 text-white rounded py-1 px-5">{{$month->name_month}}</small>
+                                <small class="bg-slate-600 text-white rounded py-2 px-5 rounded-xl">{{$month->name_month}}</small>
                                 @empty
 
                                 @endforelse

@@ -12,13 +12,13 @@
             <div class="sm:flex sm:items-center sm:justify-between">
                 <div>
                     <div class="flex items-center mx-12  gap-x-3">
-                        <span class="bg-slate-200 rounded-2xl border border-slate-300 px-5 py-1 text-sm">{{ count($clients) }} clienti</span>
+                        <span class="bg-slate-200 rounded-2xl border border-slate-300 px-5 py-2 text-sm">{{ count($clients) }} clienti</span>
                     </div>
                 </div>
                 
 
                 <div class="flex items-center mx-12  mt-4 gap-x-3">
-                    <a href="{{ route('admin.clients.create') }}" class="flex items-center justify-center w-1/2 px-5 py-1  tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-2xl shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 ">
+                    <a href="{{ route('admin.clients.create') }}" class="flex items-center justify-center w-1/2 px-5 py-2   text-white transition-colors duration-200 bg-slate-600  rounded-xl shrink-0 sm:w-auto gap-x-2 hover:bg-slate-700 focus:bg-slate-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -26,10 +26,12 @@
                     </a>
                 </div>
             </div>
+
             <div class="my-3 mx-12  h-[50px]">
                 @include('admin.partials.messages')
             </div>
 
+            {{-- SEARCH CLIENTS --}}
             <div class="mt-6 mx-12   md:flex md:items-center md:justify-between">
                 <div class="flex items-center">
                     <form action="{{ route('admin.clients.index') }}" method="get">
@@ -41,11 +43,11 @@
                                 </svg>
                             </span>
 
-                            <input type="text" autocomplete="off" placeholder="Cerca cliente per nome" name="search" class="block w-full py-1.5 pr-5 text-gray-700 bg-white border border-gray-200 rounded-2xl md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5  focus:border-slate-300 focus:ring-blue-200">
-                            <button type="submit" class="font-bold text-white rounded-2xl px-5 py-1 bg-gray-500 ms-2 hover:bg-gray-600">cerca</button>
+                            <input type="text" autocomplete="off" placeholder="Cerca cliente per nome" name="search" class="block w-full py-2 pr-5 text-gray-700 bg-white border border-gray-200 rounded-xl md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5  focus:border-slate-300 focus:ring-blue-200">
+                            <button type="submit" class="font-bold text-white rounded-xl px-5 py-2 bg-gray-500 ms-2 hover:bg-gray-600">cerca</button>
                         </div>
                     </form>
-                    <a href="{{ route('admin.clients.index') }}" class="font-bold text-white rounded-2xl px-5 py-1 bg-red-500 ms-2 hover:bg-red-600" type="submit">Reset</a>
+                    <a href="{{ route('admin.clients.index') }}" class="font-bold text-white rounded-xl px-5 py-2 bg-slate-300 ms-2 hover:bg-slate-400" type="submit">Reset</a>
                 </div>
             </div>
 
@@ -81,8 +83,8 @@
                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
                                             <form action="{{ route('admin.clients.changeClientPosition', $client->id)}}" method="get">
                                                 @csrf
-                                                <input type="number" value="{{$client->position}}" class="rounded-2xl py-1 border border-slate-300" max="{{count($clients)}}" min="1" name="new_position">
-                                                <button class="bg-gray-600 rounded-2xl py-1 px-5 text-white">sposta</button>
+                                                <input type="number" value="{{$client->position}}" class="rounded-xl py-2 border border-slate-300" max="{{count($clients)}}" min="1" name="new_position">
+                                                <button class="bg-gray-500 hover:bg-gray-600 rounded-xl py-2 px-5 text-white">sposta</button>
                                             </form>
                                         </td>
                                         <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
@@ -99,7 +101,7 @@
                                         </td>
                                         <td class="py-4 px-3">
                                             <div class="flex">
-                                                <a class="bg-slate-600 flex items-center  me-2 justify-between px-4 py-1 text-white rounded-2xl" href="{{ route('admin.events.index', $client->id)}}">
+                                                <a class="bg-slate-500 hover:bg-slate-600 flex items-center  me-2 justify-between px-4 py-2 text-white rounded-xl focus:bg-slate-800" href="{{ route('admin.events.index', $client->id)}}">
                                                     <div class="flex items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
@@ -109,37 +111,37 @@
 
                                                     </div>
                                                  </a>
-                                                <a class="bg-slate-600 flex items-center  me-2 justify-between px-4 py-1 text-white rounded-2xl" href="{{ route('admin.files.index', [$client->id] )}}">
+                                                <a class="bg-slate-500 hover:bg-slate-600 flex items-center  me-2 justify-between px-4 py-2 text-white rounded-xl focus:bg-slate-800" href="{{ route('admin.files.index', [$client->id] )}}">
                                                     <div class="flex items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                                                         </svg>
-                                                        <small class="mx-2">
+                                                        <span class="mx-2">
                                                             allegati
-                                                        </small>
+                                                        </span>
                                                     </div>
-                                                    <small class="bg-slate-500 border border-slate-300   text-black rounded-full flex items-center justify-center   w-[20px] text-slate-100 ">{{ count($client->files)}}</small>
+                                                    <small class="bg-slate-500 border border-slate-300 text-black rounded-full flex items-center justify-center w-[20px] text-slate-100 ">{{ count($client->files)}}</small>
                                                 </a>
                                       
-                                                <a class="bg-slate-600 flex items-center me-2 justify-between px-4 py-1 text-white rounded-2xl" href="{{route('admin.notes.index', $client->id)}}">
+                                                <a class="bg-slate-500 hover:bg-slate-600 flex items-center me-2 justify-between px-4 py-2 text-white rounded-xl focus:bg-slate-800" href="{{route('admin.notes.index', $client->id)}}">
                                                     <div class="flex items-center">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                                         </svg>
-                                                        <small class="mx-2">
+                                                        <span class="mx-2">
                                                             note
-                                                        </small>
+                                                        </span>
                                                     </div>
-                                                    <small class="bg-slate-500 border border-slate-300  text-black rounded-full flex items-center justify-center    w-[20px] text-slate-100 ">{{ count($client->notes)}}</small>
+                                                    <small class="bg-slate-500 border border-slate-300 text-black rounded-full flex items-center justify-center w-[20px] text-slate-100 ">{{ count($client->notes)}}</small>
                                                 </a>
-                                                <a href="{{ route('admin.clients.show', $client->id) }}" class="px-4 py-1 me-2 flex items-center bg-blue-600 text-white transition-colors duration-200 rounded-2xl  hover:bg-blue-500 focus:bg-blue-800">
+                                                <a href="{{ route('admin.clients.show', $client->id) }}" class="px-4 py-2 me-2 flex items-center bg-blue-600 text-white transition-colors duration-200 rounded-xl  hover:bg-blue-500 focus:bg-blue-800">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     </svg>
                                                     <span class="ms-1">dettagli</span>
                                                 </a>
-                                                <a href="{{ route('admin.clients.edit', $client->id) }}" class="px-4 py-1 me-2 flex items-center bg-gray-600 text-white transition-colors duration-200 rounded-2xl  hover:bg-gray-500 focus:bg-blue-800">
+                                                <a href="{{ route('admin.clients.edit', $client->id) }}" class="px-4 py-2 me-2 flex items-center bg-gray-600 text-white transition-colors duration-200 rounded-xl  hover:bg-gray-500 focus:bg-slate-800">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                         <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                                     </svg>
@@ -147,11 +149,11 @@
                                                 </a>
                                                 <div x-data="{ showModal{{ $client->id }}: false }">
                                                     <!-- Button to open the modal -->
-                                                    <button @click="showModal{{ $client->id }} = true" class="px-4 py-1 flex items-center  bg-red-600 text-white transition-colors duration-200 rounded-2xl  hover:bg-red-500 focus:bg-blue-800">
+                                                    <button @click="showModal{{ $client->id }} = true" class="px-4 py-2 flex items-center  bg-red-600 text-white transition-colors duration-200 rounded-xl  hover:bg-red-500 focus:bg-red-800">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
                                                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                         </svg>
-                                                        <span class="me-1">elimina</span>
+                                                        <span class="ms-1">elimina</span>
                                                     </button>
                                                     <!-- Background overlay -->
                                                     <div x-cloak style="display: none" x-show="showModal{{ $client->id }}" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal{{ $client->id }} = false">
@@ -190,11 +192,11 @@
                                                                         @csrf
                                                                         @method('delete')
 
-                                                                        <button class="px-5 py-1 flex items-center  bg-red-600 text-white transition-colors duration-200 rounded-2xl hover:bg-red-500 focus:bg-blue-800">
-                                                                            <span class="me-2">elimina</span>
+                                                                        <button class="px-5 py-2 flex items-center  bg-red-600 text-white transition-colors duration-200 rounded-xl hover:bg-red-500 focus:bg-blue-800">
+                                                                            elimina 
                                                                         </button>
                                                                     </form>
-                                                                    <button @click="showModal{{ $client->id }} = false" type="button" class="mt-3 me-3 w-full inline-flex justify-center rounded-2xl border border-gray-300 shadow-sm px-5 py-1 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"> cancel </button>
+                                                                    <button @click="showModal{{ $client->id }} = false" type="button" class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"> cancel </button>
                                                                 </div>
                                                             </div>
                                                         </div>
