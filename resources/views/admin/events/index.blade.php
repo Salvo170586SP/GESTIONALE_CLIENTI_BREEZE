@@ -17,8 +17,8 @@
     <section class="container px-12 mx-auto">
         <div class="py-5">
 
-            {{-- MODAL EDIT --}}
             @foreach($client->events as $event)
+            {{-- MODAL EDIT --}}
             <!-- Background overlay -->
             <div x-cloak style="display: none" id="editModalEventOverlay{{$event->id}}" x-show="showModal"
                 class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
@@ -60,6 +60,12 @@
                                                 class=" title w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                         </div>
                                         <div class="mt-3">
+                                            <label for="description"
+                                                class="mb-2 block text-base text-sm font-medium text-[#07074D]">Descrizione</label>
+                                            <textarea rows="5" id="description{{$event->id}}" name="description"
+                                                class=" w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">{{ $event->description }}</textarea>
+                                        </div>
+                                        <div class="mt-3">
                                             <label for="start"
                                                 class="mb-2 block text-base text-sm font-medium text-[#07074D]">Inizio</label>
                                             <input type="datetime-local" name="start" value="{{$event->start}}"
@@ -75,10 +81,10 @@
                                         </div>
                                         <div class="pt-5 text-end">
                                             <button id="editModalEventBtnSubmit{{$event->id}}"
-                                                class=" mt-3 w-full inline-flex justify-center rounded-2xl border border-gray-300 shadow-sm px-5 py-1 bg-slate-500 text-base font-medium text-white hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                class=" mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-slate-500 text-base font-medium text-white hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 Crea </button>
                                             <button type="button" id="editModalEventBtn{{$event->id}}"
-                                                class="mt-3 me-3 w-full inline-flex justify-center rounded-2xl border border-gray-300 shadow-sm px-5 py-1 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 cancel </button>
                                         </div>
 
@@ -89,10 +95,120 @@
                     </div>
                 </div>
             </div>
+
+            {{-- MODAL INFO --}}
+            <!-- Background overlay -->
+            <div style="display: none; transition: 1s" id="infoModalEventOverlay{{$event->id}}"
+                class="fixed inset-0 transition-opacity">
+                <div class="absolute inset-0 bg-gray-500 opacity-75 transition"></div>
+            </div>
+            <div style="display: none" id="infoModalEvent{{$event->id}}"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200 transform"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="fixed z-10 inset-0 overflow-y-auto transition ease-out duration-300 transform">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <!-- Modal panel -->
+                    <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <!-- Modal content -->
+                            <div class="sm:flex sm:items-start">
+                                <div
+                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                                        Info
+                                        Appuntamento </h3>
+                                    <div class="my-5 w-full">
+                                        <div class="mt-3">
+                                            <h4 class="mb-3 text-lg p-2  font-medium text-gray-900">{{$event->title}}
+                                            </h4>
+                                            @if($event->description)
+                                            <span class="text-sm font-small mb-10">Descrizione evento:</span>
+                                            <div class="border border-slate-300 rounded-xl p-2">
+                                                <p>{{$event->description}}</p>
+                                            </div>
+                                            @endif
+                                        </div>
+                                        <div class="pt-5 text-end">
+                                            <button type="button" id="infoModalEventBtn{{$event->id}}"
+                                                class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                cancel </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {{-- MODAL DELETE CONFIRM --}}
+            <!-- Background overlay -->
+            <div style="display: none; transition: 1s" id="deleteModalEventOverlay{{$event->id}}"
+                class="fixed inset-0 transition-opacity">
+                <div class="absolute inset-0 bg-gray-500 opacity-75 transition"></div>
+            </div>
+            <div style="display: none" id="deleteModalEvent{{$event->id}}"
+                x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave="transition ease-in duration-200 transform"
+                x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                class="fixed z-10 inset-0 overflow-y-auto transition ease-out duration-300 transform">
+                <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                    <!-- Modal panel -->
+                    <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+                        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                            <!-- Modal content -->
+                            <div class="sm:flex sm:items-start">
+                                <div
+                                    class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 4.5v15m7.5-7.5h-15" />
+                                    </svg>
+                                </div>
+                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                                        Attenzione </h3>
+                                    <div class="my-5 w-full">
+                                        <div class="mt-3">
+                                            Sei sicuro di eliminare {{ $event->title}}?
+                                        </div>
+                                        <div class="pt-5 text-end">
+                                            <button type="button" id="deleteModalEventBtn{{$event->id}}"
+                                                class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                cancel </button>
+                                            <button type="button" id="submitDeleteModalEvent{{$event->id}}"
+                                                class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                                                elimina </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endforeach
 
-
-
+            {{-- CREATE EVENT --}}
             <div class="flex justify-between mb-10">
                 <div x-data="{ showModal: false }">
                     <!-- Button to open the modal -->
@@ -149,7 +265,12 @@
                                                         <input type="text" name="title"
                                                             class="w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                     </div>
-
+                                                    <div class="mt-3">
+                                                        <label for="description"
+                                                            class="mb-2 block text-base text-sm font-medium text-[#07074D]">Descrizione</label>
+                                                        <textarea rows="5" id="description" name="description"
+                                                            class=" w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"></textarea>
+                                                    </div>
                                                     <div class="mt-3">
                                                         <label for="start"
                                                             class="mb-2 block text-base text-sm font-medium text-[#07074D]">Inizio</label>
@@ -205,7 +326,6 @@
 <script>
     $.ajaxSetup({
         headers: {
-            /*  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), */
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
@@ -223,7 +343,6 @@
         , selectable: true
         , eventResizableFromStart: true
         , locale: 'it',
-
 
 
         eventContent: function(info) {
@@ -259,29 +378,40 @@
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                     </svg>
-            
                 </span>
             </div>`;
 
             //delete                        
             eventElement.querySelector('.spanDelete').addEventListener('click', function() {
-                if (confirm("sei sicuro di eliminare l'evento " + eventTitle + "?")) {
-
-                    const event = info.event.id;
-                    console.log(client, event);
-
+                const eventId = info.event.id;
+                const deleteModalEvent = document.getElementById('deleteModalEvent' + eventId);
+                const deleteModalEventOverlay = document.getElementById('deleteModalEventOverlay' + eventId);
+                const deleteModalEventBtn = document.getElementById('deleteModalEventBtn' + +eventId);
+                const submitDeleteModalEvent = document.getElementById('submitDeleteModalEvent' + +eventId);
+                deleteModalEventOverlay.style.display = 'block';
+                deleteModalEvent.style.display = 'block';
+                
+                /* close modal */
+                deleteModalEventBtn.addEventListener('click', function() {
+                    deleteModalEventOverlay.style.display = 'none';
+                    deleteModalEvent.style.display = 'none';
+                })
+                
+                submitDeleteModalEvent.addEventListener('click', function() {
                     $.ajax({
                         method: 'DELETE'
-                        , url: `/dashboard/events/${client}/${event}/deleteEvent`
+                        , url: `/dashboard/events/${client}/${eventId}/deleteEvent`
                         , success: function(response) {
                             console.log('event eliminato');
                             calendar.refetchEvents();
+                            deleteModalEventOverlay.style.display = 'none';
+                            deleteModalEvent.style.display = 'none';
                         }
                         , error: function(error) {
                             console.log(error);
                         }
                     });
-                }
+                });
             });
 
             //edit
@@ -292,28 +422,30 @@
                 const editModalEventOverlay = document.getElementById('editModalEventOverlay' + eventId);
                 const editModalEventBtnClose = document.getElementById('editModalEventBtn' + +eventId);
                 const editModalEventBtnSubmits = document.getElementById('editModalEventBtnSubmit' + eventId);
-
+                
                 editModalEventOverlay.style.display = 'block';
                 editModalEvent.style.display = 'block';
-
+                
                 /* close modal */
                 editModalEventBtnClose.addEventListener('click', function() {
                     editModalEventOverlay.style.display = 'none';
                     editModalEvent.style.display = 'none';
                 })
-
+                
                 const titleValue = document.getElementById('title' + eventId);
+                const descriptionValue = document.getElementById('description' + eventId);
                 const startValue = document.getElementById('start' + eventId);
                 const endValue = document.getElementById('end' + eventId);
-
-
+                
+                
                 editModalEventBtnSubmits.addEventListener('click', function() {
-
+                    
                     $.ajax({
                         method: 'PUT'
                         , url: `/dashboard/events/${client}/${eventId}/updateContent`
                         , data: {
                             title: titleValue.value,
+                            description: descriptionValue.value,
                             start: startValue.value,
                             end: endValue.value
                         }
@@ -329,10 +461,21 @@
                     });
                 });
             });
-
+            
             //info
             eventElement.querySelector('.editInfo').addEventListener('click', function() {
-                confirm(eventTitle)
+                const eventId = info.event.id;
+                const infoModalEvent = document.getElementById('infoModalEvent' + eventId);
+                const infoModalEventOverlay = document.getElementById('infoModalEventOverlay' + eventId);
+                const infoModalEventBtn = document.getElementById('infoModalEventBtn' + +eventId);
+                infoModalEventOverlay.style.display = 'block';
+                infoModalEvent.style.display = 'block';
+
+                    /* close modal */
+                infoModalEventBtn.addEventListener('click', function() {
+                    infoModalEventOverlay.style.display = 'none';
+                    infoModalEvent.style.display = 'none';
+                })
             });
 
             return {

@@ -36,6 +36,7 @@ class EventController extends Controller
         $event = new Event();
         $event->client_id = $client->id;
         $event->title = $request->title;
+        $event->description = $request->description;
         $event->start = $request->start;
         $event->end = $request->end;
         $event->save();
@@ -63,6 +64,7 @@ class EventController extends Controller
 
             $event->update([
                 'title' => $request->title,
+                'description' => $request->description,
                 'start' => $request->start,
                 'end' => $request->end
             ]);
