@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Dashboard / Clienti / Appuntamenti') }} {{ $client->name_client}} {{ $client->surname_client}}
+                {{ __('Dashboard / Clienti / Appuntamenti') }} {{ $client->name_client }} {{ $client->surname_client }}
             </h2>
             <a href="{{ route('admin.clients.index') }}"
                 class="flex items-center justify-center  px-5 py-2 text-sm tracking-wide text-white bg-gray-400 rounded-xl shrink-0 sm:w-auto gap-x-2 hover:bg-gray-500 focus:bg-gray-800  ">
@@ -17,14 +17,14 @@
     <section class="container px-12 mx-auto">
         <div class="py-5">
 
-            @foreach($client->events as $event)
+            @foreach ($client->events as $event)
             {{-- MODAL EDIT --}}
             <!-- Background overlay -->
-            <div x-cloak style="display: none" id="editModalEventOverlay{{$event->id}}" x-show="showModal"
+            <div x-cloak style="display: none" id="editModalEventOverlay{{ $event->id }}" x-show="showModal"
                 class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
-            <div x-cloak style="display: none" id="editModalEvent{{$event->id}}" x-show="editModalEvent"
+            <div x-cloak style="display: none" id="editModalEvent{{ $event->id }}" x-show="editModalEvent"
                 x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -47,7 +47,7 @@
                                             d="M12 4.5v15m7.5-7.5h-15" />
                                     </svg>
                                 </div>
-                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                                <div class=" mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
                                     <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                         Modifica
                                         Appuntamento </h3>
@@ -55,35 +55,35 @@
                                         <div class="mt-3">
                                             <label for="title"
                                                 class="mb-2 block text-base text-sm font-medium text-[#07074D]">Titolo</label>
-                                            <input type="text" id="title{{$event->id}}" value="{{$event->title}}"
+                                            <input type="text" id="title{{ $event->id }}" value="{{ $event->title }}"
                                                 name="title"
                                                 class=" title w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                         </div>
                                         <div class="mt-3">
                                             <label for="description"
                                                 class="mb-2 block text-base text-sm font-medium text-[#07074D]">Descrizione</label>
-                                            <textarea rows="5" id="description{{$event->id}}" name="description"
+                                            <textarea rows="5" id="description{{ $event->id }}" name="description"
                                                 class=" w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">{{ $event->description }}</textarea>
                                         </div>
                                         <div class="mt-3">
                                             <label for="start"
                                                 class="mb-2 block text-base text-sm font-medium text-[#07074D]">Inizio</label>
-                                            <input type="datetime-local" name="start" value="{{$event->start}}"
-                                                id="start{{$event->id}}"
+                                            <input type="datetime-local" name="start" value="{{ $event->start }}"
+                                                id="start{{ $event->id }}"
                                                 class="w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
                                         </div>
                                         <div class="mt-3">
                                             <label for="end"
                                                 class="mb-2 block text-base text-sm font-medium text-[#07074D]">Fine</label>
-                                            <input type="datetime-local" name="end" value="{{$event->end}}"
-                                                id="end{{$event->id}}"
+                                            <input type="datetime-local" name="end" value="{{ $event->end }}"
+                                                id="end{{ $event->id }}"
                                                 class="w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md">
                                         </div>
                                         <div class="pt-5 text-end">
-                                            <button id="editModalEventBtnSubmit{{$event->id}}"
+                                            <button id="editModalEventBtnSubmit{{ $event->id }}"
                                                 class=" mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-slate-500 text-base font-medium text-white hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 Crea </button>
-                                            <button type="button" id="editModalEventBtn{{$event->id}}"
+                                            <button type="button" id="editModalEventBtn{{ $event->id }}"
                                                 class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 cancel </button>
                                         </div>
@@ -98,11 +98,11 @@
 
             {{-- MODAL INFO --}}
             <!-- Background overlay -->
-            <div style="display: none; transition: 1s" id="infoModalEventOverlay{{$event->id}}"
+            <div style="display: none; transition: 1s" id="infoModalEventOverlay{{ $event->id }}"
                 class="fixed inset-0 transition-opacity">
                 <div class="absolute inset-0 bg-gray-500 opacity-75 transition"></div>
             </div>
-            <div style="display: none" id="infoModalEvent{{$event->id}}"
+            <div style="display: none" id="infoModalEvent{{ $event->id }}"
                 x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -131,17 +131,18 @@
                                         Appuntamento </h3>
                                     <div class="my-5 w-full">
                                         <div class="mt-3">
-                                            <h4 class="mb-3 text-lg p-2  font-medium text-gray-900">{{$event->title}}
+                                            <h4 class="mb-3 text-lg p-2  font-medium text-gray-900">
+                                                {{ $event->title }}
                                             </h4>
-                                            @if($event->description)
+                                            @if ($event->description)
                                             <span class="text-sm font-small mb-10">Descrizione evento:</span>
                                             <div class="border border-slate-300 rounded-xl p-2">
-                                                <p>{{$event->description}}</p>
+                                                <p>{{ $event->description }}</p>
                                             </div>
                                             @endif
                                         </div>
                                         <div class="pt-5 text-end">
-                                            <button type="button" id="infoModalEventBtn{{$event->id}}"
+                                            <button type="button" id="infoModalEventBtn{{ $event->id }}"
                                                 class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 cancel </button>
                                         </div>
@@ -157,11 +158,11 @@
 
             {{-- MODAL DELETE CONFIRM --}}
             <!-- Background overlay -->
-            <div style="display: none; transition: 1s" id="deleteModalEventOverlay{{$event->id}}"
+            <div style="display: none; transition: 1s" id="deleteModalEventOverlay{{ $event->id }}"
                 class="fixed inset-0 transition-opacity">
                 <div class="absolute inset-0 bg-gray-500 opacity-75 transition"></div>
             </div>
-            <div style="display: none" id="deleteModalEvent{{$event->id}}"
+            <div style="display: none" id="deleteModalEvent{{ $event->id }}"
                 x-transition:enter="transition ease-out duration-300 transform"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -189,13 +190,13 @@
                                         Attenzione </h3>
                                     <div class="my-5 w-full">
                                         <div class="mt-3">
-                                            Sei sicuro di eliminare {{ $event->title}}?
+                                            Sei sicuro di eliminare {{ $event->title }}?
                                         </div>
                                         <div class="pt-5 text-end">
-                                            <button type="button" id="deleteModalEventBtn{{$event->id}}"
+                                            <button type="button" id="deleteModalEventBtn{{ $event->id }}"
                                                 class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 cancel </button>
-                                            <button type="button" id="submitDeleteModalEvent{{$event->id}}"
+                                            <button type="button" id="submitDeleteModalEvent{{ $event->id }}"
                                                 class="mt-3 me-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                 elimina </button>
                                         </div>
@@ -222,12 +223,12 @@
                         <span class="ms-1">Crea appuntamento</span>
                     </button>
                     <!-- Background overlay -->
-                    <div x-cloak style="display: none" x-show="showModal" class="fixed inset-0 transition-opacity"
-                        aria-hidden="true" @click="showModal = false">
+                    <div x-cloak style="display: none" id="overlayCreate" x-show="showModal"
+                        class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                     </div>
                     <!-- Modal -->
-                    <div x-cloak style="display: none" x-show="showModal"
+                    <div x-cloak style="display: none" x-show="showModal" id="modalCreate"
                         x-transition:enter="transition ease-out duration-300 transform"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
@@ -255,14 +256,15 @@
                                             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
                                                 Crea Appuntamento </h3>
                                             <div class="my-5 w-full">
-                                                <form action="{{route('admin.events.store', $client->id)}}"
-                                                    method="POST" class="w-full  ">
+                                                <form class="eventForm  w-full"
+                                                    action="{{ route('admin.events.store', $client->id) }}"
+                                                    method="POST">
                                                     @csrf
 
                                                     <div class="mt-3">
                                                         <label for="title"
                                                             class="mb-2 block text-base text-sm font-medium text-[#07074D]">Titolo</label>
-                                                        <input type="text" name="title"
+                                                        <input type="text" name="title" id="title"
                                                             class="w-full rounded-2xl text-sm border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                                                     </div>
                                                     <div class="mt-3">
@@ -287,7 +289,7 @@
                                                     </div>
 
                                                     <div class="pt-5 text-end">
-                                                        <button type="submit"
+                                                        <button type="submit" id="create"
                                                             class="mt-3 w-full inline-flex justify-center rounded-xl border border-gray-300 shadow-sm px-5 py-2 bg-slate-500 text-base font-medium text-white hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                                                             Crea </button>
                                                         <button @click="showModal = false" type="button"
@@ -313,6 +315,17 @@
                 </div>
             </div>
 
+            {{-- alert json --}}
+            <div class="h-[50px] my-3">
+                <div id="messageJson" style="display: none"
+                    class="bg-slate-400 text-white rounded-2xl p-3 flex justify-between items-center">
+                    <span id="spanMessage"></span>
+                    <button id="closeAlert"
+                        class="bg-slate-200 rounded-full text-black px-2 border border-slate-200">X</button>
+                </div>
+
+            </div>
+
             <div id="calendar" class="text-slate-500" style="z-index: -5"></div>
     </section>
     </div>
@@ -332,17 +345,22 @@
 
     const calendarEl = document.getElementById('calendar');
     const events = [];
-    const client = "<?php echo json_encode($client->id) ?>";
+    const client = "<?php echo json_encode($client->id); ?>";
+
+    const messageJson = document.getElementById('messageJson');
+    const closeAlert = document.getElementById('closeAlert');
+    const spanMessage = document.getElementById('spanMessage');
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-        , timeZone: 'UTC'
-        , events: `/dashboard/events/${client}/getEvents`
-        , dayMaxEvents: true
-        , editable: true
-        , selectable: true
-        , eventResizableFromStart: true
-        , locale: 'it',
+        initialView: 'dayGridMonth',
+        timeZone: 'UTC',
+        events: `/dashboard/events/${client}/getEvents`,
+        dayMaxEvents: true,
+        editable: true,
+        selectable: true,
+        eventResizableFromStart: true,
+        locale: 'it',
+
 
 
         eventContent: function(info) {
@@ -351,9 +369,7 @@
             eventElement.style.display = 'inline-flex';
             eventElement.style.width = '100%';
             eventElement.style.justifyContent = 'space-between';
-            eventElement.style.border = '1px solid lightgrey';
             eventElement.style.borderRadius = '5px';
-            eventElement.style.backgroundColor = '#c4cbd4';
             eventElement.innerHTML = `<span>
                 ${eventTitle.slice(0, 10)}...
             </span>
@@ -367,14 +383,14 @@
                 </span>
                 <span class="editDelete" title="modifica">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        class="w-6 h-6  bg-blue-500 text-white p-1  rounded-xl ms-1 border border-slate-100">
+                        class="w-6 h-6  bg-slate-500 text-white p-1  rounded-xl ms-1 border border-slate-100">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
                     </svg>
                 </span>
                 <span class="editInfo" title="dettagli">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                        class="w-6 h-6  bg-blue-500 text-white p-1  rounded-xl ms-1 border border-slate-100">
+                        class="w-6 h-6  bg-slate-500 text-white p-1  rounded-xl ms-1 border border-slate-100">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
                     </svg>
@@ -385,29 +401,42 @@
             eventElement.querySelector('.spanDelete').addEventListener('click', function() {
                 const eventId = info.event.id;
                 const deleteModalEvent = document.getElementById('deleteModalEvent' + eventId);
-                const deleteModalEventOverlay = document.getElementById('deleteModalEventOverlay' + eventId);
-                const deleteModalEventBtn = document.getElementById('deleteModalEventBtn' + +eventId);
-                const submitDeleteModalEvent = document.getElementById('submitDeleteModalEvent' + +eventId);
+                const deleteModalEventOverlay = document.getElementById('deleteModalEventOverlay' +
+                    eventId);
+                const deleteModalEventBtn = document.getElementById('deleteModalEventBtn' + +
+                    eventId);
+                const submitDeleteModalEvent = document.getElementById('submitDeleteModalEvent' + +
+                    eventId);
                 deleteModalEventOverlay.style.display = 'block';
                 deleteModalEvent.style.display = 'block';
-                
+
                 /* close modal */
                 deleteModalEventBtn.addEventListener('click', function() {
                     deleteModalEventOverlay.style.display = 'none';
                     deleteModalEvent.style.display = 'none';
                 })
-                
+
                 submitDeleteModalEvent.addEventListener('click', function() {
                     $.ajax({
-                        method: 'DELETE'
-                        , url: `/dashboard/events/${client}/${eventId}/deleteEvent`
-                        , success: function(response) {
+                        method: 'DELETE',
+                        url: `/dashboard/events/${client}/${eventId}/deleteEvent`,
+                        success: function(response) {
                             console.log('event eliminato');
                             calendar.refetchEvents();
                             deleteModalEventOverlay.style.display = 'none';
                             deleteModalEvent.style.display = 'none';
-                        }
-                        , error: function(error) {
+                            if (response.message) {
+                                messageJson.style.display = 'flex';
+                                spanMessage.innerText = `${response.message}`;
+                            }
+
+                            /* chiusura alert */
+                            closeAlert.addEventListener('click', function() {
+                                messageJson.style.display = 'none';
+                            })
+
+                        },
+                        error: function(error) {
                             console.log(error);
                         }
                     });
@@ -419,64 +448,83 @@
 
                 const eventId = info.event.id;
                 const editModalEvent = document.getElementById('editModalEvent' + eventId);
-                const editModalEventOverlay = document.getElementById('editModalEventOverlay' + eventId);
-                const editModalEventBtnClose = document.getElementById('editModalEventBtn' + +eventId);
-                const editModalEventBtnSubmits = document.getElementById('editModalEventBtnSubmit' + eventId);
-                
+                const editModalEventOverlay = document.getElementById('editModalEventOverlay' +
+                    eventId);
+                const editModalEventBtnClose = document.getElementById('editModalEventBtn' + +
+                    eventId);
+                const editModalEventBtnSubmits = document.getElementById('editModalEventBtnSubmit' +
+                    eventId);
+
                 editModalEventOverlay.style.display = 'block';
                 editModalEvent.style.display = 'block';
-                
+
                 /* close modal */
                 editModalEventBtnClose.addEventListener('click', function() {
                     editModalEventOverlay.style.display = 'none';
                     editModalEvent.style.display = 'none';
                 })
-                
+
                 const titleValue = document.getElementById('title' + eventId);
                 const descriptionValue = document.getElementById('description' + eventId);
                 const startValue = document.getElementById('start' + eventId);
                 const endValue = document.getElementById('end' + eventId);
-                
-                
+
+
                 editModalEventBtnSubmits.addEventListener('click', function() {
-                    
+
                     $.ajax({
-                        method: 'PUT'
-                        , url: `/dashboard/events/${client}/${eventId}/updateContent`
-                        , data: {
+                        method: 'PUT',
+                        url: `/dashboard/events/${client}/${eventId}/updateContent`,
+                        data: {
                             title: titleValue.value,
                             description: descriptionValue.value,
                             start: startValue.value,
                             end: endValue.value
-                        }
-                        , success: function(response) {
+                        },
+                        success: function(response) {
                             editModalEventOverlay.style.display = 'none';
                             editModalEvent.style.display = 'none';
                             calendar.refetchEvents();
+
+
+
+                            if (response.message) {
+                                messageJson.style.display = 'flex';
+                                spanMessage.innerText = `${response.message}`;
+                            }
+
+                            /* chiusura alert */
+                            closeAlert.addEventListener('click', function() {
+                                messageJson.style.display = 'none';
+                            })
                             console.log('titolo aggiornato con successo');
-                        }
-                        , error: function(error) {
+                        },
+                        error: function(error) {
                             console.log(error);
                         }
                     });
                 });
             });
-            
+
             //info
             eventElement.querySelector('.editInfo').addEventListener('click', function() {
                 const eventId = info.event.id;
                 const infoModalEvent = document.getElementById('infoModalEvent' + eventId);
-                const infoModalEventOverlay = document.getElementById('infoModalEventOverlay' + eventId);
+                const infoModalEventOverlay = document.getElementById('infoModalEventOverlay' +
+                    eventId);
                 const infoModalEventBtn = document.getElementById('infoModalEventBtn' + +eventId);
                 infoModalEventOverlay.style.display = 'block';
                 infoModalEvent.style.display = 'block';
 
-                    /* close modal */
+                /* close modal */
                 infoModalEventBtn.addEventListener('click', function() {
                     infoModalEventOverlay.style.display = 'none';
                     infoModalEvent.style.display = 'none';
                 })
             });
+
+
+            
 
             return {
                 domNodes: [eventElement]
@@ -494,16 +542,24 @@
             console.log(newStartDateUTC);
             console.log(newEndDateUTC);
             $.ajax({
-                method: 'PUT'
-                , url: `/dashboard/events/${client}/${eventId}/dateUpdate`
-                , data: {
-                    start: newStartDateUTC
-                    , end: newEndDateUTC
-                , }
-                , success: function(response) {
-                    console.log('spostato con successo');
-                }
-                , error: function(error) {
+                method: 'PUT',
+                url: `/dashboard/events/${client}/${eventId}/dateUpdate`,
+                data: {
+                    start: newStartDateUTC,
+                    end: newEndDateUTC,
+                },
+                success: function(response) {
+                    if (response.message) {
+                        messageJson.style.display = 'flex';
+                        spanMessage.innerText = `${response.message}`;
+                    }
+
+                    /* chiusura alert */
+                    closeAlert.addEventListener('click', function() {
+                        messageJson.style.display = 'none';
+                    })
+                },
+                error: function(error) {
                     console.log(error);
                 }
             });
@@ -526,17 +582,29 @@
 
     function filterAndDisplayEvent(searchKeyword) {
         $.ajax({
-            method: 'GET'
-            , url: `/dashboard/events/${client}/search?title=${searchKeyword}`
-            , success: function(response) {
+            method: 'GET',
+            url: `/dashboard/events/${client}/search?title=${searchKeyword}`,
+            success: function(response) {
                 calendar.removeAllEvents();
                 console.log('cercato');
                 calendar.addEventSource(response);
-            }
-            , error: function(error) {
+            },
+            error: function(error) {
                 console.log('errore nella ricerca:' + error);
             }
         });
     }
 
+
+    /* ALERT MESSAGE */
+    document.querySelector('.eventForm').addEventListener('submit', function(event) {
+        var startDate = new Date(document.getElementById('start').value);
+        var endDate = new Date(document.getElementById('end').value);
+
+        if (endDate < startDate) {
+            event
+                .preventDefault(); // Impedisce l'invio del form se la data di fine è precedente alla data di inizio
+            alert('La data di fine deve essere successiva alla data di inizio');
+        }
+    });
 </script>

@@ -43,6 +43,7 @@ class EventController extends Controller
 
         return back();
     }
+
     public function dateUpdate(Request $request, Client $client, Event $event)
     {
 
@@ -52,9 +53,10 @@ class EventController extends Controller
                 'start' => Carbon::parse($request->input('start'))->setTimeZone('UTC'),
                 'end' => Carbon::parse($request->input('end'))->setTimeZone('UTC')
             ]);
-        }
 
-        return response()->json(['message' => 'Data aggiornata']);
+         }
+
+        return response()->json(['message' => 'Data correttamente aggiornata']);
     }
 
 
@@ -68,6 +70,8 @@ class EventController extends Controller
                 'start' => $request->start,
                 'end' => $request->end
             ]);
+          
+
         }
 
         return response()->json(['message' => 'Contenuto aggiornato']);
