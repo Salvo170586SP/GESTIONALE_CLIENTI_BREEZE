@@ -27,7 +27,7 @@ class EventController extends Controller
 
             $event->delete();
         }
-        return response()->json(['message' => 'Deleted']);
+        return response()->json(['message' => 'Evento correttamente eliminato']);
     }
 
     public function store(Request $request, Client $client)
